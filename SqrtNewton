@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <math.h>
+
+float iSqrt(float x)
+{
+    float result = 0;
+    float est, quat, mean, check;
+
+    if(x>0)
+    {
+        est = -1.0;
+        check = 1.0;
+        while(check > 0.001)
+        {
+            if(est == -1.0)
+            {
+                est = 1.0;
+            }
+            else
+            {
+                est = mean;
+            }
+            quat = x/est;
+            mean = (est+quat)/2.0;
+            check = fabs(est*est-x)/x;
+            result = mean;
+        }
+    }
+    return result;
+}
+
+main()
+{
+    float x;
+    printf("Input Number : ");
+    scanf("%f", &x);
+    printf("Result = %.4f", iSqrt(x));
+    return 0;
+}
